@@ -2,6 +2,8 @@ const statusDisplay = document.querySelector('.status');
 
 let gameActive = true;
 let currentPlayer = "X";
+let currentPlayer = "X";    //don't initialize without a value
+ChoosePlayer();
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
 const winningMessage = () => `Player ${currentPlayer} has won!`;
@@ -86,5 +88,12 @@ function handleRestartGame() {
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 }
 
+function ChoosePlayer() {
+    if (Math.round(Math.random()) == 0) {   // rounds to 0 or 1 to choose who goes first
+        
+        currentPlayer = 'X';
+
+}   else { currentPlayer = 'O'; }
+}
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
 document.querySelector('.restart').addEventListener('click', handleRestartGame);

@@ -7,6 +7,8 @@ const gameBoard = {
     ]
 };
 
+
+
 const cell1 = document.querySelector('#c1');
 const cell2 = document.querySelector('#c2');
 const cell3 = document.querySelector('#c3');
@@ -26,7 +28,7 @@ let counter = 0;
 
 cells.forEach((cell) => {
     cell.addEventListener('click', () => {
-        if (counter % 2 === 0) {
+        if (currentPlayer == 'O') {
             cell.textContent = "O";
         } else {
             cell.textContent = "X";
@@ -90,6 +92,7 @@ function reload() {
     reload.addEventListener('click', () => {
         window.location.reload();
         console.log("reloading...");
+        ChoosePlayer();
     });
 }
 reload();
