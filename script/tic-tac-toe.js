@@ -1,10 +1,10 @@
 const statusDisplay = document.querySelector('.status');
 
 let gameActive = true;
-let currentPlayer = "X";
 let currentPlayer = "X";    //don't initialize without a value
 ChoosePlayer();
 let gameState = ["", "", "", "", "", "", "", "", ""];
+let computerMove = 4;         //don't initialize without a value
 
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
@@ -88,6 +88,23 @@ function handleRestartGame() {
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 }
 
+function computerPlayer() { //computer player ai
+    
+    let moveIsValid = false;
+
+    while (!moveIsValid) {
+        computerMove = Math.round(Math.random() * 9);
+        
+        if (gameState[computerMove] == "") {
+            moveIsValid = true;
+            handleCellPlayed(cell, computerMove);
+            
+            handleResultValidation();
+        }
+    }            
+    
+}
+
 function ChoosePlayer() {
     if (Math.round(Math.random()) == 0) {   // rounds to 0 or 1 to choose who goes first
         
@@ -95,5 +112,8 @@ function ChoosePlayer() {
 
 }   else { currentPlayer = 'O'; }
 }
+
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
 document.querySelector('.restart').addEventListener('click', handleRestartGame);
