@@ -1,4 +1,7 @@
 const statusDisplay = document.querySelector('.status');
+const XScoreDisplay = document.querySelector('.XScore');
+const OScoreDisplay = document.querySelector('.OScore');
+
 
 let gameActive = true;
 let currentPlayer = "X";    //don't initialize without a value
@@ -12,6 +15,12 @@ let OScore = 0;
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+
+const updateXScore = () => XScore.innerHTML = XScore;
+const updateOScore = () => OScore.innerHTML = OScore;
+
+
+
 
 statusDisplay.innerHTML = currentPlayerTurn();
 
@@ -51,9 +60,14 @@ function handleResultValidation() {
 
             if (currentPlayer === "X") {
             XScore += 1;
+            updateXScore();
+            
             } else {
             OScore += 1;
+            updateOScore();
             }
+
+
 
             break
         }
@@ -90,6 +104,8 @@ function handleCellClick(clickedCellEvent) {
 }
 
 function handleRestartGame() {
+  
+
     gameActive = true;
     ChoosePlayer(); //didn't choose player when New Game button was clicked
     gameState = ["", "", "", "", "", "", "", "", ""];
@@ -104,12 +120,8 @@ function computerPlayer() { //computer player ai
     
     let moveIsValid = false;
 
-    //one second delay
-    setTimeout(function(){
-        console.log("thinking...");
-    }, 1000);
 
-    while (!moveIsValid) {
+    while (!moveIsValid) { //used while loop as specified
         computerMove = Math.round(Math.random() * 9);
         
         if (gameState[computerMove] == "") {
