@@ -91,11 +91,13 @@ function handleCellClick(clickedCellEvent) {
 
 function handleRestartGame() {
     gameActive = true;
-    currentPlayer = "X";
+    ChoosePlayer(); //didn't choose player when New Game button was clicked
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    
+
 }
 
 function computerPlayer() { //computer player ai
