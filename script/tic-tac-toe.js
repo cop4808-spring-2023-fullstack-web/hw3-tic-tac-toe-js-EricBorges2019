@@ -6,6 +6,9 @@ ChoosePlayer();
 let gameState = ["", "", "", "", "", "", "", "", ""];
 let computerMove = 4;         //don't initialize without a value
 
+let XScore = 0;
+let OScore = 0;
+
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
@@ -45,6 +48,13 @@ function handleResultValidation() {
         }
         if (a === b && b === c) {
             roundWon = true;
+
+            if (currentPlayer === "X") {
+            XScore += 1;
+            } else {
+            OScore += 1;
+            }
+
             break
         }
     }
