@@ -92,6 +92,11 @@ function computerPlayer() { //computer player ai
     
     let moveIsValid = false;
 
+    //one second delay
+    setTimeout(function(){
+        console.log("thinking...");
+    }, 1000);
+
     while (!moveIsValid) {
         computerMove = Math.round(Math.random() * 9);
         
