@@ -51,6 +51,10 @@ body {
     
 }
 
+.winner{
+    background-color: cyan;
+}
+
 a {
     text-decoration: underline;
     color: black;

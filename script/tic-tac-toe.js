@@ -77,6 +77,11 @@ function handleResultValidation() {
             if (currentPlayer === "X" && roundWon) {
             XScore = XScore + 1;
             Scoreboard.innerHTML = currentScore();
+
+            cells[winCondition[0]].classList.add('winner');
+            cells[winCondition[1]].classList.add('winner');
+            cells[winCondition[2]].classList.add('winner');
+            
             
             
 
@@ -140,6 +145,11 @@ function handleRestartGame() {
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 
+    for (let i = 0; i <= 8; i++) {
+
+        cells[i].classList.remove('winner');
+    }
+
     if (currentPlayer === "O") {
         computerPlayer();
         handlePlayerChange();
@@ -147,7 +157,6 @@ function handleRestartGame() {
         currentPlayer = "X";
         
         statusDisplay.innerHTML = currentPlayerTurn();
-        
     }
     
 
