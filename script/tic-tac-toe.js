@@ -28,7 +28,7 @@ const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
-const currentScore = () => `X - ${XScore}\nO - ${OScore}`;
+const currentScore = () => `X - ${XScore}O - ${OScore}`;
 
 
 statusDisplay.innerHTML = currentPlayerTurn();
@@ -119,6 +119,13 @@ function handleCellClick(clickedCellEvent) {
 
     handleCellPlayed(clickedCell, clickedCellIndex);
     handleResultValidation();
+
+    if (gameActive) {
+    
+    
+        computerPlayer();
+    }
+    
 }
 
 function handleRestartGame() {
@@ -133,7 +140,8 @@ function handleRestartGame() {
 
     if (currentPlayer === "O") {
         computerPlayer();
-        currentPlayer = "X"; 
+        handlePlayerChange();
+        
     }
     
 
@@ -152,7 +160,7 @@ function computerPlayer() { //computer player ai
 
     while (!moveIsValid) { //used while loop as specified
         currentMoveNumber += 1;
-        console.log(currentMoveNumber);
+        console.log("Calculated this move " + currentMoveNumber + " time(s)!");
         
 
         computerMove = Math.round(Math.random() * 8);
@@ -174,19 +182,23 @@ function computerPlayer() { //computer player ai
             cells[computerMove].innerHTML = "O";
             
 
-            handlePlayerChange();
+            
+
+            
+            
             
         }
         
         
         
         else {
-            console.log("move was invalid");
-        return
+            console.log("move was invalid, recalculating");
         }
-
-        currentPlayer = "X";
         
+        handlePlayerChange();
+        currentPlayer = "X";
+        console.log("current player is " + currentPlayer);
+
     }            
     
 }
