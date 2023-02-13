@@ -55,6 +55,10 @@ body {
     background-color: cyan;
 }
 
+.loser {
+    background-color: orange;
+}
+
 a {
     text-decoration: underline;
     color: black;

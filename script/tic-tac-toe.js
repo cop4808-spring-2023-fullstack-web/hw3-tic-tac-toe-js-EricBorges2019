@@ -74,7 +74,11 @@ function handleResultValidation() {
         if (a === b && b === c) {
             roundWon = true;
 
-            if (currentPlayer === "X" && roundWon) {
+            
+
+            if (a === "X" && roundWon) {    //this was originally currentPlayer  
+                                            //but while testing it started giving me score
+                XScore = XScore + 1;
             XScore = XScore + 1;
             Scoreboard.innerHTML = currentScore();
 
@@ -152,11 +156,7 @@ function handleRestartGame() {
 
     if (currentPlayer === "O") {
         computerPlayer();
-        handlePlayerChange();
-
-        currentPlayer = "X";
-        
-        statusDisplay.innerHTML = currentPlayerTurn();
+            
     }
     
 
@@ -194,13 +194,14 @@ function computerPlayer() { //computer player ai
             console.log("valid move found!");
 
             
-                        
-
-            handleCellPlayed(computerMove, computerMove);
-
-            
-            handleResultValidation();
             cells[computerMove].innerHTML = "O";
+
+            gameState[computerMove] = "O";
+
+
+            handleResultValidation();
+
+
             
             
         }
