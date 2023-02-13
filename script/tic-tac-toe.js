@@ -86,14 +86,17 @@ function handleResultValidation() {
             cells[winCondition[1]].classList.add('winner');
             cells[winCondition[2]].classList.add('winner');
             
-            
-            
+
 
             
-            } else if (currentPlayer === "O" && roundWon) {
+            } else if (a === "O" && roundWon) {
 
             OScore = OScore + 1;
             Scoreboard.innerHTML = currentScore();
+            cells[winCondition[0]].classList.add('loser');
+            cells[winCondition[1]].classList.add('loser');
+            cells[winCondition[2]].classList.add('loser');
+
             }
             console.log(gameState);
 
@@ -152,7 +155,9 @@ function handleRestartGame() {
     for (let i = 0; i <= 8; i++) {
 
         cells[i].classList.remove('winner');
+        cells[i].classList.remove('loser');
     }
+
 
     if (currentPlayer === "O") {
         computerPlayer();
