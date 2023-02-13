@@ -30,6 +30,9 @@ const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
 const currentScore = () => `X - ${XScore} | O - ${OScore}`;
 
+//I HAVE NO CLUE HOW TO MAKE A LINE BREAK WORK HERE
+//SORRY NOTHING
+
 
 statusDisplay.innerHTML = currentPlayerTurn();
 
