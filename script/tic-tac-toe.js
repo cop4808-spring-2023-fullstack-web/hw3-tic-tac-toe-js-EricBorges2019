@@ -78,7 +78,7 @@ function handleResultValidation() {
 
             if (a === "X" && roundWon) {    //this was originally currentPlayer  
                                             //but while testing it started giving me score
-                XScore = XScore + 1;
+            
             XScore = XScore + 1;
             Scoreboard.innerHTML = currentScore();
 
