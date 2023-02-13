@@ -28,7 +28,7 @@ const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
-const currentScore = () => `X - ${XScore}O - ${OScore}`;
+const currentScore = () => `X - ${XScore} | O - ${OScore}`;
 
 
 statusDisplay.innerHTML = currentPlayerTurn();
@@ -86,6 +86,7 @@ function handleResultValidation() {
             OScore = OScore + 1;
             Scoreboard.innerHTML = currentScore();
             }
+            console.log(gameState);
 
             break
         }
@@ -133,6 +134,7 @@ function handleRestartGame() {
 
     gameActive = true;
     ChoosePlayer();
+    console.log(gameState);
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
@@ -141,6 +143,10 @@ function handleRestartGame() {
     if (currentPlayer === "O") {
         computerPlayer();
         handlePlayerChange();
+
+        currentPlayer = "X";
+        
+        statusDisplay.innerHTML = currentPlayerTurn();
         
     }
     
@@ -150,6 +156,8 @@ function handleRestartGame() {
 function computerPlayer() { //computer player ai
 
     console.log("Computer Player called!");
+
+    statusDisplay.innerHTML = currentPlayerTurn();
 
     
     
@@ -165,26 +173,25 @@ function computerPlayer() { //computer player ai
 
         computerMove = Math.round(Math.random() * 8);
 
-        console.log(computerMove);
 
-        if (gameState[computerMove] == "") {
+            console.log(Math.floor(computerMove / 3)+1);
+            console.log((computerMove % 3)+1);
+
+
+        if (gameState[computerMove] == "") { //if the cell is empty
             
             moveIsValid = true; //breaks loop
             
-            console.log("move was valid");
+            console.log("valid move found!");
 
             
+                        
 
             handleCellPlayed(computerMove, computerMove);
 
             
             handleResultValidation();
             cells[computerMove].innerHTML = "O";
-            
-
-            
-
-            
             
             
         }
@@ -194,10 +201,11 @@ function computerPlayer() { //computer player ai
         else {
             console.log("move was invalid, recalculating");
         }
-        
+
         handlePlayerChange();
         currentPlayer = "X";
         console.log("current player is " + currentPlayer);
+        statusDisplay.innerHTML = currentPlayerTurn();
 
     }            
     
