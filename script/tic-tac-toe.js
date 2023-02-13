@@ -1,6 +1,18 @@
 const statusDisplay = document.querySelector('.status');
-const XScoreDisplay = document.querySelector('.XScore');
-const OScoreDisplay = document.querySelector('.OScore');
+const Scoreboard = document.querySelector('.Scoreboard');
+
+const cell1 = document.querySelector('#c1');
+const cell2 = document.querySelector('#c2');
+const cell3 = document.querySelector('#c3');
+const cell4 = document.querySelector('#c4');
+const cell5 = document.querySelector('#c5');
+const cell6 = document.querySelector('#c6');
+const cell7 = document.querySelector('#c7');
+const cell8 = document.querySelector('#c8');
+const cell9 = document.querySelector('#c9');
+const cells = document.querySelectorAll('.cell');
+
+//copied above const cells whatever from main.js to make stuff easier
 
 
 let gameActive = true;
@@ -16,10 +28,7 @@ const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
-const updateXScore = () => XScore.innerHTML = XScore;
-const updateOScore = () => OScore.innerHTML = OScore;
-
-
+const currentScore = () => `X - ${XScore}\nO - ${OScore}`;
 
 
 statusDisplay.innerHTML = currentPlayerTurn();
@@ -35,6 +44,12 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
+if (currentPlayer === "O") {
+    computerPlayer();
+    currentPlayer = "X"; 
+    statusDisplay.innerHTML = currentPlayerTurn();
+}
+
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
     clickedCell.innerHTML = currentPlayer;
@@ -43,6 +58,7 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 function handlePlayerChange() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusDisplay.innerHTML = currentPlayerTurn();
+
 }
 
 function handleResultValidation() {
@@ -58,16 +74,18 @@ function handleResultValidation() {
         if (a === b && b === c) {
             roundWon = true;
 
-            if (currentPlayer === "X") {
-            XScore += 1;
-            updateXScore();
+            if (currentPlayer === "X" && roundWon) {
+            XScore = XScore + 1;
+            Scoreboard.innerHTML = currentScore();
             
-            } else {
-            OScore += 1;
-            updateOScore();
+            
+
+            
+            } else if (currentPlayer === "O" && roundWon) {
+
+            OScore = OScore + 1;
+            Scoreboard.innerHTML = currentScore();
             }
-
-
 
             break
         }
@@ -107,29 +125,68 @@ function handleRestartGame() {
   
 
     gameActive = true;
-    ChoosePlayer(); //didn't choose player when New Game button was clicked
+    ChoosePlayer();
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+
+    if (currentPlayer === "O") {
+        computerPlayer();
+        currentPlayer = "X"; 
+    }
     
 
 }
 
 function computerPlayer() { //computer player ai
+
+    console.log("Computer Player called!");
+
+    
     
     let moveIsValid = false;
+    let currentMoveNumber = 0;
+
 
 
     while (!moveIsValid) { //used while loop as specified
-        computerMove = Math.round(Math.random() * 9);
+        currentMoveNumber += 1;
+        console.log(currentMoveNumber);
         
+
+        computerMove = Math.round(Math.random() * 8);
+
+        console.log(computerMove);
+
         if (gameState[computerMove] == "") {
-            moveIsValid = true;
-            handleCellPlayed(cell, computerMove);
+            
+            moveIsValid = true; //breaks loop
+            
+            console.log("move was valid");
+
+            
+
+            handleCellPlayed(computerMove, computerMove);
+
             
             handleResultValidation();
+            cells[computerMove].innerHTML = "O";
+            
+
+            handlePlayerChange();
+            
         }
+        
+        
+        
+        else {
+            console.log("move was invalid");
+        return
+        }
+
+        currentPlayer = "X";
+        
     }            
     
 }
